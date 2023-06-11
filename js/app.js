@@ -19,7 +19,7 @@ AppState.prototype.instantiateProducts = function () {
 }
 
 AppState.prototype.saveToLocalStorage = function () {
-  // TODO: Fill in this instance method to save product data to local storage
+//   // TODO: Fill in this instance method to save product data to local storage
     let stringifiedProducts = JSON.stringify(this.allProducts)
     localStorage.setItem('allProducts', stringifiedProducts);
       } 
@@ -28,15 +28,44 @@ AppState.prototype.saveToLocalStorage = function () {
 AppState.prototype.loadItems = function () {
 
   // TODO: Update this instance method to retrieve data from local storage instead of creating new Products on each page load
+this.instantiateProducts();
 
 // Check to see if there are products in local storage
 // If there are products in local storage, then reintantiate your product arrayw with those products
 // If there are not products inside, then use instantiate products methods to fill local storage with new products
 
-    // if localStorage.getItem 
+let localProducts = localStorage.getItem('allProducts')
 
 
-}
+    if (localProducts) {
+      localProducts = JSON.parse(localProducts);
+      for(let i = 0; i < localProducts.length; i++){
+        console.log(localProducts)
+        if(localProducts[i].name === 'sweep'){
+          let reconstructedProducts = new Product(localProducts[i].name, 'png');
+          reconstructedProducts.source = localProducts[i].source;
+          reconstructedProducts.timesClicked = localProducts[i].timesClicked;
+          reconstructedProducts.timesShown = localProducts[i].timesShown;
+
+          localProducts.push(reconstructedProducts);
+        } else{
+          let reconstructedProducts = new Product(localProducts[i].name);
+          reconstructedProducts.source = localProducts[i].source;
+          reconstructedProducts.timesClicked = localProducts[i].timesClicked;
+          reconstructedProducts.timesShown = localProducts[i].timesShown;
+
+          localProducts.push(reconstructedProducts);
+
+        }
+        }
+      }
+        else{
+        AppState.prototype.instantiateProducts();    
+      }
+    
+    }
+
+  
 
 
 function Product(name, fileExtension = 'jpg') {

@@ -14,25 +14,25 @@ let canvasElem = document.getElementById('chart')
 
 const AppState = new AppState();
 
-function AppState(){
+// function AppState(){
  
-AppState.prototype.instantiateProducts();    
-AppState.loaditems();
-AppState.allproducts = [];
+// AppState.prototype.instantiateProducts();    
+// AppState.loaditems();
+// AppState.allproducts = [];
 
 
-let views = [] 
-let labels = []
-let votes = []
+// let views = [] 
+// let labels = []
+// let votes = []
 
-let productNamesString = JSON.stringify(productNames);
-localStorage.setItem('productNames', productNamesString);
+// let productNamesString = JSON.stringify(productNames);
+// localStorage.setItem('productNames', productNamesString);
 
-for(let i = 0; i < productNames.length; i++){
-  productNames.push(allProducts[i].name);
-  proudctVotes.push(allProuducts[i].votes);
-  productViews.push(allProducts[i].views);
-}
+// for(let i = 0; i < productNames.length; i++){
+//   productNames.push(allProducts[i].name);
+//   proudctVotes.push(allProuducts[i].votes);
+//   productViews.push(allProducts[i].views);
+// }
 
 const ctx = document.getElementById('chart');
 
@@ -71,6 +71,6 @@ new Chart(ctx, {
 
 
 }
-}
+
 
 renderChart();
