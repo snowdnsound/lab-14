@@ -12,7 +12,7 @@ let canvasElem = document.getElementById('chart')
  */
 
 
-const AppState = new AppState();
+const ChartState = new AppState();
 
 // function AppState(){
  
@@ -28,31 +28,55 @@ const AppState = new AppState();
 // let productNamesString = JSON.stringify(productNames);
 // localStorage.setItem('productNames', productNamesString);
 
-// for(let i = 0; i < productNames.length; i++){
-//   productNames.push(allProducts[i].name);
-//   proudctVotes.push(allProuducts[i].votes);
-//   productViews.push(allProducts[i].views);
-// }
+
 
 const ctx = document.getElementById('chart');
 
 function renderChart() {
 
+  const chartState = new AppState();
+
+  console.log('CHART STATE IN BEGINNING', chartState)
+
+
+
+  chartState.loadItems();
+  console.log('CHART STATE AFTER PRODUCTS HAS BEEN LOADED', chartState)
+
+
+let views = [] 
+let labels = []
+let votes = []
+
+console.log(chartState.allProducts.length)
+
+
+  for(let i = 0; i < chartState.allProducts.length; i++){
+  labels.push(chartState.allProducts[i].name);
+  votes.push(chartState.allProducts[i].timesShown);
+  views.push(chartState.allProducts[i].timesClicked);
+}
+
+console.log('labels', labels)
+console.log('views', views)
+console.log('votes', votes)
+
+
 Chart.defaults.color = 'black';
 new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: productNames,
+    labels: labels,
     datasets: [{
       label: '# of Votes',
-      data: productVotes,
+      data: votes,
       borderWidth: 2,
       backgroundColor: '#e76f51',
       borderColor: 'black',
     },
     {
       label: '# of Views',
-      data: productViews,
+      data: views,
       borderWidth: 2,
       backgroundColor: '#e9c46a',
       borderColor: 'black',
